@@ -24,7 +24,11 @@ const router = new Router(function () {
    * 
    * This will only be two single lines
    * If you did this right, you should see just 1 recipe card rendered to the screen
+   * 
    */
+document.getElementsByClassName('section--recipe-cards shown').recipeCardEl.classList.add('shown');
+document.getElementsByClassName("section--recipe-expand").classList.remove('shown');
+
 });
 
 window.addEventListener('DOMContentLoaded', init);
@@ -119,6 +123,27 @@ function createRecipeCards() {
    * After this step you should see multiple cards rendered like the end of the last
    * lab
    */
+  
+  // for (let i = 1; i < recipeData.length; i++) {
+  //   let newCard = document.createElement("recipe-card");
+  //   let main = document.querySelector("main");
+  //   newCard.data = recipeData[recipes[i]];
+  //   main.appendChild(newCard);
+  // }
+  for (let i = 0; i < recipeData.length; i ++) {
+    const recipeCard = document.createElement('recipe-card');
+    recipeCard.data = recipeData[recipes[i]];
+  
+    const page = recipeData[recipes[i]]['page-name'];
+    router.addPage(page, function() {
+      document.querySelector('.section--recipe-cards').classList.remove('shown');
+      document.querySelector('.section--recipe-expand').classList.add('shown');
+      document.querySelector('recipe-expand').data = recipeData[recipes[i]];
+    });
+    bindRecipeCard(recipeCard, page);
+  
+    document.querySelector('.recipe-cards--wrapper').appendChild(recipeCard);
+  }
 }
 
 /**
