@@ -26,8 +26,8 @@ const router = new Router(function () {
    * If you did this right, you should see just 1 recipe card rendered to the screen
    * 
    */
-document.getElementsByClassName('section--recipe-cards shown').recipeCardEl.classList.add('shown');
-document.getElementsByClassName("section--recipe-expand").classList.remove('shown');
+   document.querySelector('.section--recipe-cards').classList.remove('shown');
+   document.querySelector('.section--recipe-expand').classList.add('shown');
 
 });
 
@@ -108,6 +108,9 @@ function createRecipeCards() {
     router.addPage(page, function() {
       document.querySelector('.section--recipe-cards').classList.remove('shown');
       document.querySelector('.section--recipe-expand').classList.add('shown');
+      if (i > 2) {
+        document.querySelector('.section--recipe-cards').classList.add('hidden');
+      }
       document.querySelector('recipe-expand').data = recipeData[recipes[i]];
     });
     bindRecipeCard(recipeCard, page);
