@@ -2,22 +2,28 @@
 //         so do not move it next to the other scripts
 
 const CACHE_NAME = 'lab-7-starter'
-
+// Urls we're fetching recipes from
+var urlsToCache = [
+  'https://introweb.tech/assets/json/ghostCookies.json',
+  'https://introweb.tech/assets/json/birthdayCake.json',
+  'https://introweb.tech/assets/json/chocolateChip.json',
+  'https://introweb.tech/assets/json/stuffing.json',
+  'https://introweb.tech/assets/json/turkey.json',
+  'https://introweb.tech/assets/json/pumpkinPie.json'
+]
 // Once the service worker has been installed, feed it some initial URLs to cache
 self.addEventListener('install', function (event) {
   /**
    * TODO - Part 2 Step 2
    * Create a function as outlined above
    */
-  // Urls we're fetching recipes from
-  var urlsToCache = [
-    'https://introweb.tech/assets/json/ghostCookies.json',
-    'https://introweb.tech/assets/json/birthdayCake.json',
-    'https://introweb.tech/assets/json/chocolateChip.json',
-    'https://introweb.tech/assets/json/stuffing.json',
-    'https://introweb.tech/assets/json/turkey.json',
-    'https://introweb.tech/assets/json/pumpkinPie.json'
-  ]
+  // Perform install steps
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      console.log('Opened cache')
+      return cache.addAll(urlsToCache)
+    })
+  )
 })
 
 /**
@@ -30,7 +36,7 @@ self.addEventListener('activate', function (event) {
    * TODO - Part 2 Step 3
    * Create a function as outlined above, it should be one line
    */
-  var cacheAllowlist = urlsToCache
+  var cacheAllowlist = ['pages-cache-v1', 'blog-posts-cache-v1']
 
   event.waitUntil(
     caches.keys().then(function (cacheNames) {
