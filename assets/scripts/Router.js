@@ -69,12 +69,12 @@ export class Router {
 
     // if page doesn't exist in this, return error
     // question: does function refer to page?
-    if (!(page in this)) {
+    if (!(this[page])) {
       console.log('Error')
       return
     }
     // Create hash
-    var hash = ''
+    let hash;
     // If page is home, set hash to be empty string
     if (page == 'home') {
       hash = ''

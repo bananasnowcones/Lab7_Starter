@@ -26,8 +26,8 @@ const router = new Router(function () {
    * If you did this right, you should see just 1 recipe card rendered to the screen
    *
    */
-  document.querySelector('.section--recipe-cards').classList.remove('shown')
-  document.querySelector('.section--recipe-expand').classList.add('shown')
+  document.querySelector('.section--recipe-cards').classList.add('shown')
+  document.querySelector('.section--recipe-expand').classList.remove('shown')
 })
 
 window.addEventListener('DOMContentLoaded', init)
@@ -124,17 +124,19 @@ function createRecipeCards () {
     // for that ghostCookies URL since it's a key in the recipeData object, and
     // then we'll grab the 'page-name' from it - in this case it will be 'ghostCookies'
     const page = recipeData[recipes[i]]['page-name']
-    router.addPage(page, function () {
-      document.querySelector('.section--recipe-cards').classList.remove('shown')
-      document.querySelector('.section--recipe-expand').classList.add('shown')
-      if (i > 2) {
-        document.querySelector('.section--recipe-cards').classList.add('hidden')
-      }
-      document.querySelector('recipe-expand').data = recipeData[recipes[i]]
-    })
-    bindRecipeCard(recipeCard, page)
+    //if (i <=2 ){
+      router.addPage(page, function () {
+        document.querySelector('.section--recipe-cards').classList.remove('shown')
+        document.querySelector('.section--recipe-expand').classList.add('shown')
+        document.querySelector('recipe-expand').data = recipeData[recipes[i]]
+  
+      })
+      
+      bindRecipeCard(recipeCard, page)
+  
+      document.querySelector('.recipe-cards--wrapper').appendChild(recipeCard)
+    //}
 
-    document.querySelector('.recipe-cards--wrapper').appendChild(recipeCard)
   }
 
   /**
@@ -232,7 +234,7 @@ function bindPopstate () {
   window.addEventListener('popstate', function (evt) {
     // if there's a state object, navigate to that state
     if (evt.state) {
-      router.navigate(evt.state, true)
+      router.navigate(evt.state.state, true)
     }
     // if no state object, navigate to home
     else {
