@@ -211,7 +211,7 @@ function bindEscKey () {
     }
   })
 }
-
+ 
 /**
  * Binds the 'popstate' event on the window (which fires when the back &
  * forward buttons are pressed) so the navigation will continue to work
