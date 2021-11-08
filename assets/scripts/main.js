@@ -124,18 +124,19 @@ function createRecipeCards () {
     // for that ghostCookies URL since it's a key in the recipeData object, and
     // then we'll grab the 'page-name' from it - in this case it will be 'ghostCookies'
     const page = recipeData[recipes[i]]['page-name']
-    //if (i <=2 ){
+    if(i>2){
+      recipeCard.classList.add('hidden');
+    }
       router.addPage(page, function () {
         document.querySelector('.section--recipe-cards').classList.remove('shown')
         document.querySelector('.section--recipe-expand').classList.add('shown')
-        document.querySelector('recipe-expand').data = recipeData[recipes[i]]
-  
+        document.querySelector('recipe-expand').data = recipeData[recipes[i]]  
       })
       
       bindRecipeCard(recipeCard, page)
   
       document.querySelector('.recipe-cards--wrapper').appendChild(recipeCard)
-    //}
+ 
 
   }
 
