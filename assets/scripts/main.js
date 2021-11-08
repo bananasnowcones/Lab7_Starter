@@ -130,14 +130,12 @@ function createRecipeCards () {
       router.addPage(page, function () {
         document.querySelector('.section--recipe-cards').classList.remove('shown')
         document.querySelector('.section--recipe-expand').classList.add('shown')
-        document.querySelector('recipe-expand').data = recipeData[recipes[i]]
-  
+        document.querySelector('recipe-expand').data = recipeData[recipes[i]]  
       })
       
       bindRecipeCard(recipeCard, page)
   
       document.querySelector('.recipe-cards--wrapper').appendChild(recipeCard)
-
 
   }
 
